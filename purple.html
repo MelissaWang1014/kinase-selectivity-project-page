@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computational Design of Mini-Proteins for Selective Kinase Inhibition</title>
+<meta name="description" content="A computational pipeline and GUI platform for designing selective mini-protein kinase binders, built with BindCraft and ColabFold.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style-purple.css">
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="icon-github" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+      0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
+      1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+      -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82
+      .44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01
+      2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+  </symbol>
+</svg>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand nav-brand-text" href="#top">Selective&nbsp;Binder<span>.design</span></a>
+    <div class="nav-links">
+      <a href="#people">People</a>
+      <a href="#abstract">Abstract</a>
+      <a href="#approach">Approach</a>
+      <a href="#experiments">Experiments</a>
+      <a href="#gui">GUI Platform</a>
+      <a href="#quotes">Quotes</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top" class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">2026 WashU Digital Transformation Summer Corps</p>
+    <h1>Computational Design of Mini&#8209;Proteins<br>for Selective Kinase Inhibition</h1>
+
+    <div class="authors">
+      <span class="author">Melissa Wang</span>
+      <span class="author">Mingyue Ding</span>
+      <span class="author">Sourabh Sharma</span>
+      <span class="author">Saif Arif</span>
+      <span class="author">Robi Mitra <sup>PI</sup></span>
+    </div>
+    <p class="affiliation">Washington University in St. Louis &middot; McKelvey School of Engineering &amp; School of Medicine</p>
+
+    <div class="hero-links">
+      <a class="btn btn-primary" href="https://d5j3l1rgzmla.cloudfront.net" target="_blank" rel="noopener">Live GUI Platform</a>
+      <a class="btn" href="https://github.com/washu-dev/p2p-interaction" target="_blank" rel="noopener"><svg class="icon-gh"><use href="#icon-github"></use></svg>GitHub Repository</a>
+      <a class="btn" href="https://github.com/martinpacesa/BindCraft" target="_blank" rel="noopener"><svg class="icon-gh"><use href="#icon-github"></use></svg>BindCraft</a>
+      <a class="btn" href="https://github.com/YoshitakaMo/localcolabfold" target="_blank" rel="noopener"><svg class="icon-gh"><use href="#icon-github"></use></svg>ColabFold</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="people" class="section alt">
+    <div class="section-inner">
+      <h2>People</h2>
+      <div class="people-grid">
+        <div class="person">
+          <div class="avatar">MW</div>
+          <h3>Melissa Wang</h3>
+          <p class="role">Student Developer</p>
+          <p class="detail">Computer Science &amp; Mathematics, WashU &rsquo;29</p>
+        </div>
+        <div class="person">
+          <div class="avatar">MD</div>
+          <h3>Mingyue Ding</h3>
+          <p class="role">Student Developer</p>
+          <p class="detail">Computer Science, WashU &rsquo;27</p>
+        </div>
+        <div class="person">
+          <div class="avatar">SS</div>
+          <h3>Sourabh Sharma</h3>
+          <p class="role">Program Manager</p>
+          <p class="detail">Digital Transformation (DI2)</p>
+        </div>
+        <div class="person">
+          <div class="avatar">SA</div>
+          <h3>Saif Arif</h3>
+          <p class="role">Tech Leader</p>
+          <p class="detail">Digital Transformation (DI2)</p>
+        </div>
+        <div class="person">
+          <div class="avatar">RM</div>
+          <h3>Dr. Robi Mitra</h3>
+          <p class="role">Faculty PI</p>
+          <p class="detail">WashU School of Medicine</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="abstract" class="section">
+    <div class="section-inner narrow">
+      <h2>Abstract</h2>
+      <p>
+        Many kinases share highly similar sequences and structures, which makes it difficult to design binders
+        that engage one target kinase strongly without also binding closely related paralogs. Poor selectivity
+        can cause off-target effects, reduce experimental reliability, and limit an inhibitor's usefulness in
+        medicine. We built a computational pipeline &mdash; combining <strong>BindCraft</strong> and
+        <strong>ColabFold</strong> (AlphaFold2) for structure prediction and mini-protein binder generation with
+        custom Python/bash <strong>selectivity-profiling</strong> scripts &mdash; to design de novo mini-protein
+        binders and evaluate each candidate against 50+ kinases spanning all 8 major kinase families using the
+        ipTM confidence metric. To make this workflow accessible to researchers without a computational
+        background, we also developed a <strong>GUI platform</strong> that unifies binder design, selectivity
+        visualization, and a shared public binder library behind a simple point-and-click interface. Our next
+        goal is to push the pipeline toward <strong>paralog-level</strong> selectivity &mdash; for example
+        discriminating LATS1 from LATS2 &mdash; and to validate the strongest computational hits experimentally
+        with pull-down assays.
+      </p>
+    </div>
+  </section>
+
+  <section id="approach" class="section alt">
+    <div class="section-inner">
+      <h2>Approach</h2>
+      <p class="lead">
+        For each target, we predict its structure, generate candidate mini-protein binders, and then profile
+        every candidate's selectivity against a broad kinase panel before inspecting the top hits visually.
+      </p>
+
+      <figure class="figure">
+        <img src="assets/img/pipeline-diagram.jpg" alt="Pipeline: target FASTA to AlphaFold2 structure to BindCraft binder to selectivity profiler plots">
+        <figcaption>Target sequence &rarr; AlphaFold2 structure &rarr; BindCraft binder design &rarr; selectivity profiling against the kinase panel.</figcaption>
+      </figure>
+
+      <div class="two-col">
+        <div>
+          <h3>Tools</h3>
+          <ul class="tool-list">
+            <li><strong>BindCraft</strong> &mdash; de novo mini-protein binder design</li>
+            <li><strong>ColabFold / AlphaFold2</strong> &mdash; target structure prediction</li>
+            <li><strong>Kinase selectivity profiler</strong> &mdash; in-house Python/bash scripts scoring every candidate against the kinase panel via ipTM</li>
+            <li><strong>PyMOL</strong> &mdash; visual inspection of target folding and binder&ndash;target interactions</li>
+          </ul>
+        </div>
+        <figure class="figure figure-sm">
+          <img src="assets/img/structure-render.png" alt="PyMOL rendering of a designed mini-protein binder docked onto its target kinase">
+          <figcaption>PyMOL rendering of a designed mini-protein binder (cyan) docked on its target kinase domain (magenta), with a broader structural context shown in translucent surface.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="experiments" class="section">
+    <div class="section-inner">
+      <h2>Experiments</h2>
+
+      <h3>Step 1 &mdash; Cross-family selectivity screening</h3>
+      <p>
+        For each target &mdash; NDR1/NDR2, LATS1/LATS2, ROCK1/ROCK2, and Map4k4 &mdash; every BindCraft-designed
+        candidate was screened against an 8-kinase panel (and, for NDR2, an extended panel of 50+ kinases
+        spanning all 8 major kinase families) to check for on-target vs. off-target binding using the ipTM
+        confidence metric. Scroll through the full set of results below.
+      </p>
+
+      <div class="hgallery">
+        <figure class="hgallery-item">
+          <img src="assets/img/lats1-binder-highest.png" alt="LATS1_binder highest ipTM across the 8-kinase panel">
+          <figcaption><strong>LATS1_binder</strong> &mdash; highest ipTM. Confident on LATS1 (0.91); every other kinase falls below 0.6.</figcaption>
+        </figure>
+        <figure class="hgallery-item">
+          <img src="assets/img/lats1-binder-avg.png" alt="LATS1_binder average ipTM across the 8-kinase panel">
+          <figcaption><strong>LATS1_binder</strong> &mdash; average ipTM. LATS1 leads the panel at 0.43; LATS2 trails at 0.28.</figcaption>
+        </figure>
+        <figure class="hgallery-item">
+          <img src="assets/img/lats2-binder-highest-b.png" alt="LATS2_binder candidate highest ipTM across the 8-kinase panel">
+          <figcaption><strong>LATS2_binder</strong> (candidate B) &mdash; highest ipTM. Confident on both LATS1 (0.93) and LATS2 (0.95).</figcaption>
+        </figure>
+        <figure class="hgallery-item">
+          <img src="assets/img/lats2-binder-avg-b.png" alt="LATS2_binder candidate average ipTM across the 8-kinase panel">
+          <figcaption><strong>LATS2_binder</strong> (candidate B) &mdash; average ipTM. LATS1 0.86 and LATS2 0.82, both confident.</figcaption>
+        </figure>
+        <figure class="hgallery-item">
+          <img src="assets/img/lats2-binder-highest-a.png" alt="LATS2_binder alternate candidate highest ipTM across the 8-kinase panel">
+          <figcaption><strong>LATS2_binder</strong> (candidate A) &mdash; highest ipTM. An off-target candidate: PDL1 (0.80) scores higher than LATS2 itself (0.25).</figcaption>
+        </figure>
+        <figure class="hgallery-item">
+          <img src="assets/img/lats2-binder-avg-a.png" alt="LATS2_binder alternate candidate average ipTM across the 8-kinase panel">
+          <figcaption><strong>LATS2_binder</strong> (candidate A) &mdash; average ipTM. No kinase clears the confident threshold; LATS2 itself is only 0.22.</figcaption>
+        </figure>
+        <figure class="hgallery-item">
+          <img src="assets/img/ndr1-binder-avg.png" alt="NDR1_binder average ipTM across the 8-kinase panel">
+          <figcaption><strong>NDR1_binder</strong> &mdash; average ipTM. Confident on NDR1 (0.88) and NDR2 (0.88); all other kinases fall below 0.6.</figcaption>
+        </figure>
+        <figure class="hgallery-item">
+          <img src="assets/img/ndr2-binder-avg-8panel.png" alt="NDR2_binder average ipTM across the 8-kinase panel">
+          <figcaption><strong>NDR2_binder</strong> &mdash; average ipTM (8-kinase panel). Confident on NDR1 (0.92) and NDR2 (0.93).</figcaption>
+        </figure>
+        <figure class="hgallery-item">
+          <img src="assets/img/rock1-binder-highest.png" alt="ROCK1_binder highest ipTM across the 8-kinase panel">
+          <figcaption><strong>ROCK1_binder</strong> &mdash; highest ipTM. Best score 0.23 (LATS1) &mdash; no confident hit on any kinase.</figcaption>
+        </figure>
+        <figure class="hgallery-item">
+          <img src="assets/img/rock1-binder-avg.png" alt="ROCK1_binder average ipTM across the 8-kinase panel">
+          <figcaption><strong>ROCK1_binder</strong> &mdash; average ipTM. Best score 0.19 (LATS1).</figcaption>
+        </figure>
+        <figure class="hgallery-item">
+          <img src="assets/img/rock2-binder-highest.png" alt="ROCK2_binder highest ipTM across the 8-kinase panel">
+          <figcaption><strong>ROCK2_binder</strong> &mdash; highest ipTM. Best score 0.48 (LATS1) &mdash; still below the confident threshold.</figcaption>
+        </figure>
+        <figure class="hgallery-item">
+          <img src="assets/img/rock2-binder-avg.png" alt="ROCK2_binder average ipTM across the 8-kinase panel">
+          <figcaption><strong>ROCK2_binder</strong> &mdash; average ipTM. Best score 0.25 (LATS1).</figcaption>
+        </figure>
+        <figure class="hgallery-item">
+          <img src="assets/img/map4k4-binder-highest.png" alt="Map4k4_binder highest ipTM across the 8-kinase panel">
+          <figcaption><strong>Map4k4_binder</strong> &mdash; highest ipTM. Map4k4 reaches 0.95 (confident); PDL1 sits in the grey zone (0.75).</figcaption>
+        </figure>
+        <figure class="hgallery-item">
+          <img src="assets/img/map4k4-binder-avg.png" alt="Map4k4_binder average ipTM across the 8-kinase panel">
+          <figcaption><strong>Map4k4_binder</strong> &mdash; average ipTM. Best score 0.66 (Map4k4) &mdash; grey zone, not yet confident.</figcaption>
+        </figure>
+      </div>
+
+      <p class="lead">
+        NDR2's binder was also screened against an extended panel of 50+ kinases spanning all 8 major kinase
+        families:
+      </p>
+      <div class="gallery-wide">
+        <figure class="figure">
+          <img src="assets/img/ndr2-binder-highest-50panel.png" alt="NDR2_binder highest ipTM across the extended 50+ kinase panel">
+          <figcaption><strong>NDR2_binder</strong> &mdash; highest ipTM across the extended 50+-kinase, 8-family panel. Only NDR1/NDR2 are confident.</figcaption>
+        </figure>
+        <figure class="figure">
+          <img src="assets/img/ndr2-binder-avg-50panel.png" alt="NDR2_binder average ipTM across the extended 50+ kinase panel">
+          <figcaption><strong>NDR2_binder</strong> &mdash; average ipTM across the extended 50+-kinase, 8-family panel. Clean selectivity for the NDR paralogs.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Step 2 &mdash; Toward within-paralog selectivity: LATS1 vs. LATS2</h3>
+      <p>
+        Our longer-term idea is to fuse a binder that engages the shared kinase domain of both paralogs with a
+        second binder that is selective for one paralog's more divergent N-terminus, so the fusion inherits
+        both affinity and selectivity.
+      </p>
+      <div class="two-col">
+        <figure class="figure figure-md">
+          <img src="assets/img/lats2-binder-highest-b.png" alt="Protein kinase domain binder targeting LATS2, highest ipTM across the kinase panel">
+          <figcaption><strong>Protein kinase domain binder</strong>: designed against LATS2's kinase domain, it confidently engages both paralogs (LATS1 ipTM 0.93, LATS2 ipTM 0.95) while scoring lower against the rest of the panel &mdash; a shared-domain binder, not yet selective within the LATS1/LATS2 pair.</figcaption>
+        </figure>
+        <figure class="figure figure-md">
+          <img src="assets/img/lats1-nterminus-selective.png" alt="Selective binder targeting the LATS1 N-terminus, highest ipTM across the kinase panel">
+          <figcaption><strong>Selective N-terminus binder</strong>: targeting the LATS1 N-terminus alone (residues 95&ndash;150), it is confident on LATS1 (ipTM 0.90) and drops below 0.6 against every other kinase in the panel &mdash; the selectivity half of the planned fusion.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="gui" class="section alt">
+    <div class="section-inner">
+      <h2>GUI Platform</h2>
+      <p class="lead">
+        A web platform that turns the command-line pipeline into a guided, six-step workflow &mdash; upload,
+        structure prediction, binder design, selectivity screening, visualization, and download &mdash; plus a
+        shared public binder library and a simple search-first entry point.
+      </p>
+      <p><a class="btn btn-primary" href="https://d5j3l1rgzmla.cloudfront.net" target="_blank" rel="noopener">Open the live platform &rarr;</a></p>
+
+      <figure class="figure figure-full">
+        <img src="assets/img/gui-home.png" alt="GUI platform home page showing the six-step workflow">
+      </figure>
+      <figure class="figure figure-full">
+        <img src="assets/img/gui-search.png" alt="GUI platform simple search page for finding a kinase and launching the pipeline">
+      </figure>
+    </div>
+  </section>
+
+  <section id="quotes" class="section">
+    <div class="section-inner">
+      <h2>Reflections</h2>
+      <div class="quote-grid">
+        <blockquote class="quote">
+          <p>&ldquo;My role in this project was to develop the GUI platform and design selective binders for
+          different kinase targets with my teammate. Through this project, I learned how to use AI-assisted
+          coding tools, including Claude Code and Codex, for the full-stack web application. I also gained
+          experience using computational protein design and structure prediction workflows to generate
+          candidate binders and predict their binding interactions in silico. Working with researchers from
+          both biology and computer science taught me how to use computational methods to solve biological
+          research problems.&rdquo;</p>
+          <cite>Melissa Wang</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <p>&ldquo;As a computer science student with interests in Biology, this project was a perfect
+          opportunity for me to explore computational tools in Biology. Structural biology was new to all of
+          us, so we worked together to find the right tools. I mainly worked on connecting all the pieces,
+          including structure folding prediction, binder generation, and selectivity profiling scripts, into
+          one workflow on both the RIS cluster and our GUI platform. I am very grateful for the empowering
+          support from our PI and mini DI2 team.&rdquo;</p>
+          <cite>Mingyue Ding</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <p>&ldquo;Melissa and Mingyue did a fantastic job, as did their mentors Saif and Sourabh. I was most
+          surprised by how much progress they made in such a short time. Over the course of a few weeks they
+          learned how to design mini-protein binders against important drug targets. They are now working to
+          improve the specificity of the binders so that closely related paralogues can be discriminated.
+          Their efforts were very impressive.&rdquo;</p>
+          <cite>Dr. Robi Mitra, Faculty PI</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="impact" class="section alt">
+    <div class="section-inner narrow">
+      <h2>Broader Impact &amp; Next Steps</h2>
+      <p>
+        The project benefits researchers and students working in protein engineering, drug discovery, and
+        computational biology by making kinase binder design more accessible, efficient, and user-friendly. The
+        GUI platform lowers the technical barrier of command-line workflows, letting biology-focused
+        collaborators spend their time on biological questions, interpreting results, and designing experiments
+        rather than managing complex computational tools &mdash; and the underlying approach can be adapted to
+        any publicly available kinase.
+      </p>
+      <p>
+        We will continue refining the pipeline's ability to design selective binders, moving from
+        cross-family selectivity (achieved) toward within-paralog selectivity (in progress, e.g. LATS1 vs.
+        LATS2). Once we can design high-confidence binders that discriminate between LATS1 and LATS2, we plan
+        to test them experimentally with pull-down assays, and to fold the paralog-selective workflow into the
+        GUI platform.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>Washington University in St. Louis &middot; Digital Transformation Summer Corps 2026</p>
+    <p class="footer-links">
+      <a href="https://github.com/washu-dev/p2p-interaction" target="_blank" rel="noopener"><svg class="icon-gh"><use href="#icon-github"></use></svg>GitHub</a>
+      &middot;
+      <a href="https://github.com/martinpacesa/BindCraft" target="_blank" rel="noopener"><svg class="icon-gh"><use href="#icon-github"></use></svg>BindCraft</a>
+      &middot;
+      <a href="https://github.com/YoshitakaMo/localcolabfold" target="_blank" rel="noopener"><svg class="icon-gh"><use href="#icon-github"></use></svg>ColabFold</a>
+      &middot;
+      <a href="https://d5j3l1rgzmla.cloudfront.net" target="_blank" rel="noopener">GUI Platform</a>
+      &middot;
+      <a href="https://www.pymol.org/" target="_blank" rel="noopener">PyMOL</a>
+    </p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
